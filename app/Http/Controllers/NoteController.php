@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Http\Requests\NotePostRequest;
 
 class NoteController extends Controller
 {
@@ -27,7 +27,7 @@ class NoteController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Notes/Create');
     }
 
     /**
@@ -36,9 +36,11 @@ class NoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NotePostRequest $request)
     {
-        //
+        $note = Note::create($request->all());
+
+        return redirect()->route('notes.edit',$note->id);
     }
 
     /**
@@ -70,12 +72,12 @@ class NoteController extends Controller
      * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Note $note)
+    public function update(NotePostRequest $request, Note $note)
     {
-        $request->validate([
+        /* $request->validate([
             'excerpt' => 'required',
             'content' => 'required'
-        ]);
+        ]); */
 
         $note->update($request->all());
 
