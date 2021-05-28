@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Materia;
 use App\Models\User;
 use App\Models\Note;
 use Illuminate\Database\Seeder;
@@ -21,5 +22,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Note::factory(30)->create();
+
+        Materia::factory(3)->create();
     }
 }
